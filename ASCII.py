@@ -1,5 +1,5 @@
 from PIL import Image
-
+# String ordered according to how dense the character is
 ASCII_characters = ' ..::!ilkUQRZW$&#@'
 
 def resize(image, new_width=149):
@@ -14,28 +14,31 @@ def greyscale(image):
 
 def pixel_to_ascii(image):
     pixels = image.getdata()
+    # getdata() returns a list with values for each starting from the top left pixel and going right and then down
     ascii_str = ''.join(ASCII_characters[pixel // 15] for pixel in pixels) 
-        #Maps to ASCII
+        # Maps to ASCII depending upon how high the value is
     return ascii_str
 
 def image_to_ascii(image_path, output_width=149):
     try:
         image = Image.open(image_path)
-    except Exception as e:
-        print(f'Error opening image: {e}')
-        return
-
+    # return None ensures the lines after the except block are not executed in case of an error
+    except Exception as error:
+        print(f'Error opening image: {error}')
+        return None
+    
     image = resize(image, output_width)
     image = greyscale(image)
     ascii_str = pixel_to_ascii(image)
 
-    #Format the ASCII string
+    # Formatting the ASCII string
     ascii_str = '\n'.join(ascii_str[i:i+output_width] for i in range(0, len(ascii_str), output_width))
-
+    
     print(ascii_str)
+    # Writes the .txt file
+    file_name = input('Making sure to include the .txt extension, \n Please enter a file name for the .txt file: '
+    with open(file_name, 'w') as f:
+        f.write(ascii_str)
 
-#    with open('ascii_art.txt', 'w') as f:
-#        f.write(ascii_str)
-
-image_path = input()
+image_path = input('Please enter the image path: ')
 image_to_ascii(image_path)
