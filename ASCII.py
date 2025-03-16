@@ -1,6 +1,6 @@
 from PIL import Image
 # String ordered according to how dense the character is
-ASCII_characters = ' ..::!ilkUQRZW$&#@'
+ASCII_characters = ' .:co?9W#'
 
 def resize(image, new_width=149):
     width, height = image.size
@@ -15,7 +15,7 @@ def greyscale(image):
 def pixel_to_ascii(image):
     pixels = image.getdata()
     # getdata() returns a list with values for each starting from the top left pixel and going right and then down
-    ascii_str = ''.join(ASCII_characters[pixel // 15] for pixel in pixels) 
+    ascii_str = ''.join(ASCII_characters[pixel // 30] for pixel in pixels) 
         # Maps to ASCII depending upon how high the value is
     return ascii_str
 
@@ -36,7 +36,7 @@ def image_to_ascii(image_path, output_width=149):
     
     print(ascii_str)
     # Writes the .txt file
-    file_name = input('Making sure to include the .txt extension, \n Please enter a file name for the .txt file: '
+    file_name = input('Making sure to include the .txt extension, \n Please enter a file name for the .txt file: ')
     with open(file_name, 'w') as f:
         f.write(ascii_str)
 
