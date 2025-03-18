@@ -12,3 +12,4 @@
 - The .txt file will be created within the same directory as ASCII.py 
 #### Example Output
 ![Godfather](https://github.com/subhradip1306/image-to-ascii/blob/c0f2b10cf1159778721101470743e4f87e55a257/GF.webp)
+![ASCII](https://github.com/subhradip1306/image-to-ascii/blob/2656b191e30f4384192170f1a7c1edf315d293fd/Screenshot%20from%202025-03-18%2023-39-27.png)
