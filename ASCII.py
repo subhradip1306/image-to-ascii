@@ -9,7 +9,7 @@ def resize(image, new_width=180):
 
     return image.resize((new_width, new_height))
 
-def greyscale(image):
+def greyscale(image): # getdata() for a greyscale image will return the brightness value instead of (r,g,b,a)  
     return image.convert('L')
 
 def diff(pixel1, pixel2):
@@ -28,14 +28,15 @@ def pixel_to_ascii(image, grey_image):
 		            # Enters a vertical border when two consecutive pixels have a very different color
                 elif diff(pixels[i], pixels[i+180])>90:
                     ascii_str += '-'
+			    # Similarly, a horizontal border
                 else:
 	                ascii_str += ASCII_characters[grey_pixels[i] // 30] 
-                    # Maps to ASCII depending upon how high the value is
+                    # Maps to ASCII depending upon how high the brightness value is
 
-            except TypeError:
+            except TypeError: # Caused when a pixel is empty (pixels[i] becomes 0)
                 ascii_str += ASCII_characters[pixels[i] // 30]
-
-            except IndexError:
+				
+            except IndexError: # Caused when pixels[i] is the last pixel
                 continue
 
     return ascii_str
@@ -57,9 +58,9 @@ def image_to_ascii(image_path, output_width=180):
     
     print(ascii_str)
     # Writes the .txt file
-    #file_name = input('Making sure to include the .txt extension, \n Please enter a file name for the .txt file: ')
-    #with open(file_name, 'w') as f:
-    #    f.write(ascii_str)
+    file_name = input('Making sure to include the .txt extension, \n Please enter a file name for the .txt file: ')
+    with open(file_name, 'w') as f:
+        f.write(ascii_str)
 
 image_path =input('Please enter the image path: ')
 image_to_ascii(image_path)
